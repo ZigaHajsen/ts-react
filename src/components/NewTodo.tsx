@@ -1,12 +1,16 @@
-import React, {useRef} from 'react'
+import React, { useRef } from 'react';
 
-const NewTodo: React.FC = () => {
+interface NewTodoProps {
+  onAddTodo: (todoText: string) => void;
+}
+
+const NewTodo: React.FC<NewTodoProps> = (props) => {
   const textInputRef = useRef<HTMLInputElement>(null);
 
   const todoSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     const enteredText = textInputRef.current!.value;
-    console.log(enteredText);
+    props.onAddTodo(enteredText);
   };
 
   return (
@@ -17,7 +21,7 @@ const NewTodo: React.FC = () => {
       </div>
       <button type='submit'>ADD TODO</button>
     </form>
-  )
-}
+  );
+};
 
-export default NewTodo
+export default NewTodo;
